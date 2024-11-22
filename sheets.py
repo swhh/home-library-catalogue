@@ -19,7 +19,7 @@ def update_sheet(service, spreadsheet_id, rows, range):
         print(err)
 
 
-def remove_duplicates(spreadsheet_id, sheet_id, range_to_check, service):
+def remove_duplicates(spreadsheet_id, sheet_id, service):
     
     request = {
         "requests": [
@@ -27,8 +27,8 @@ def remove_duplicates(spreadsheet_id, sheet_id, range_to_check, service):
                 "deleteDuplicates": {
                     "range": {
                         "sheetId": sheet_id,
-                        "startRowIndex": range_to_check[0],
-                        "endRowIndex": range_to_check[1],
+                        "startRowIndex": 1,
+                        "endRowIndex": 2000,
                         "startColumnIndex": 0,
                         "endColumnIndex": 2 
                     },

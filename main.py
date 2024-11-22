@@ -38,14 +38,16 @@ def main():
     book_images = get_media_items_bytes(ALBUM_ID, photo_service)
     texts = generate_texts(book_images)
     books = generate_books(texts, separator='#')
+
+    update_sheet(sheet_service, SPREADSHEET_ID, books, range=RANGE) # upload book details to spreadsheet
+    
     books = remove_duplicate_books(books)
-    update_sheet(sheet_service, SPREADSHEET_ID, books, range=RANGE)
-    remove_duplicates(SPREADSHEET_ID, sheet_id=0, range_to_check=RANGE, service=sheet_service)
     top_authors = find_top_n_authors(books, 10)
     print('Top 10 most common authors')
-    for i, (author, num) in enumerate(top_authors):
-      print(i + 1, f'Author: {author} with {num} books')
-
+    for i, (author, num) in enumerate(top_authors, start=1):
+      print(i, f'Author: {author} with {num} books')
+    
+    remove_duplicates(SPREADSHEET_ID, sheet_id=0, service=sheet_service) # remove any duplicate rows from sheet
   except HttpError as err:
     print(err)
 
