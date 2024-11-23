@@ -42,7 +42,7 @@ def main():
     update_sheet(sheet_service, SPREADSHEET_ID, books, range=RANGE) # upload book details to spreadsheet
     
     books = remove_duplicate_books(books)
-    top_authors = find_top_n_authors(books, 10)
+    top_authors = find_top_n_authors(filter(lambda x: len(x) > 1, books), 10)
     print('Top 10 most common authors')
     for i, (author, num) in enumerate(top_authors, start=1):
       print(i, f'Author: {author} with {num} books')

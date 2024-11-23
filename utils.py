@@ -13,7 +13,7 @@ def generate_books(texts, separator='-'):
     for text in texts:
         books = text.split('\n')
         books = [book.split(separator) for book in books]
-        books = [[item.strip().capitalize() for item in book] for book in books] # strip whitespace
+        books = [[item.strip().title() for item in book] for book in books] # strip whitespace
         all_books.extend(books)
     return all_books
 
